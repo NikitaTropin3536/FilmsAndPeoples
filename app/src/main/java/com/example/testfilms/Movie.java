@@ -8,8 +8,8 @@ public class Movie {
     private String overView;
     private Double rating;
 
-    public Movie(String title, String poster,
-                 String overView, Double rating) {
+    public Movie(String title, Double rating,
+                 String overView, String poster) {
         this.title = title;
         this.poster = poster;
         this.overView = overView;

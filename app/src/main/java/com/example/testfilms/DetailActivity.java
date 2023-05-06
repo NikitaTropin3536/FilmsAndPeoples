@@ -2,6 +2,7 @@ package com.example.testfilms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,10 +12,12 @@ import com.bumptech.glide.Glide;
 public class DetailActivity extends AppCompatActivity {
 
     private ImageView moviePoster;
-    private TextView movieTitle;
-    private TextView rating_tv;
-    private TextView overview_tv;
 
+    private TextView movieTitle;
+    private TextView movieRating;
+    private TextView movieOverView;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,19 +25,19 @@ public class DetailActivity extends AppCompatActivity {
 
         moviePoster = findViewById(R.id.moviePoster);
         movieTitle = findViewById(R.id.movieTitle);
-        rating_tv = findViewById(R.id.rating_tv);
-        overview_tv = findViewById(R.id.description);
+        movieRating = findViewById(R.id.movieRating);
+        movieOverView = findViewById(R.id.movieOverView);
 
         Bundle bundle = getIntent().getExtras();
 
-        String mMovieTitle = bundle.getString("title");
         String mPoster = bundle.getString("poster");
-        String mOver = bundle.getString("overview");
         Double mRating = bundle.getDouble("rating");
+        String mMovieTitle = bundle.getString("title");
+        String mOver = bundle.getString("overview");
 
         Glide.with(this).load(mPoster).into(moviePoster);
         movieTitle.setText(mMovieTitle);
-        rating_tv.setText(mRating.toString());
-        overview_tv.setText(mOver);
+        movieRating.setText(mRating.toString());
+        movieOverView.setText(mOver);
     }
 }

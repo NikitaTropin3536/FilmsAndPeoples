@@ -24,10 +24,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<Movie> movieList = new ArrayList<>( );
+    private List<Movie> movieList = new ArrayList<>();
 
     private VolleySingleton singleton;
     private RequestQueue queue;
+
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         Log.i("все афигенно", "1");
         singleton = VolleySingleton.getmInstance(this);
@@ -50,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         String url = "https://myjsons.com/v/fc2c1069";
 
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
                 url,
                 null,
                 new Response.Listener<JSONArray>() {
@@ -65,10 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                 String poster = jsonObject.getString("poster");
                                 Double rating = jsonObject.getDouble("rating");
 
-                                Movie movie = new Movie(title,
-                                        overview,
-                                        poster,
-                                        rating);
+                                Movie movie = new Movie(title, rating, overview, poster);
 
                                 movieList.add(movie);
 

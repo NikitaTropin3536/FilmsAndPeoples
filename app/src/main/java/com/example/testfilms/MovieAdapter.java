@@ -69,21 +69,22 @@ public class MovieAdapter extends Adapter<MovieAdapter.MovieHolder> {
 
     public class MovieHolder extends RecyclerView.ViewHolder {
 
+        private ConstraintLayout constraintLayout;
+
         private ImageView poster;
         private TextView title;
         private TextView overview;
         private TextView rating;
 
-        private ConstraintLayout constraintLayout;
-
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
+
+            constraintLayout = itemView.findViewById(R.id.main_layout);
 
             poster = itemView.findViewById(R.id.poster);
             title = itemView.findViewById(R.id.title);
             overview = itemView.findViewById(R.id.overview_tv);
             rating = itemView.findViewById(R.id.rating_tv);
-            constraintLayout = itemView.findViewById(R.id.main_layout);
         }
     }
 }
